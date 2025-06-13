@@ -1,6 +1,8 @@
+
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ArrowLeft, Download, QrCode } from "lucide-react";
 import QRInputForm from "./QRInputForm";
 import QRPreview from "./QRPreview";
@@ -32,6 +34,7 @@ const QRGenerator = ({ onBack }: QRGeneratorProps) => {
   });
   
   const [isGenerating, setIsGenerating] = useState(false);
+  const [fileFormat, setFileFormat] = useState('png');
 
   const handleGenerate = async () => {
     if (!qrData.content.trim()) {
@@ -49,7 +52,7 @@ const QRGenerator = ({ onBack }: QRGeneratorProps) => {
       setIsGenerating(false);
       toast({
         title: "QR Code Generated!",
-        description: "Your QR code is ready. Click download to save as PNG.",
+        description: `Your QR code is ready. Click download to save as ${fileFormat.toUpperCase()}.`,
       });
     }, 1000);
   };
@@ -58,39 +61,49 @@ const QRGenerator = ({ onBack }: QRGeneratorProps) => {
     const canvas = document.querySelector('canvas');
     if (canvas) {
       const link = document.createElement('a');
-      link.download = 'qr-code.png';
+      link.download = `qr-code.${fileFormat}`;
       link.href = canvas.toDataURL();
       link.click();
       
       toast({
         title: "Downloaded!",
-        description: "Your QR code has been saved as qr-code.png",
+        description: `Your QR code has been saved as qr-code.${fileFormat}`,
       });
     }
   };
 
+  const formatOptions = [
+    { value: 'png', label: 'High-quality PNG (recommended)', description: 'Best for web and general use' },
+    { value: 'jpg', label: 'JPEG for mobile sharing', description: 'Compressed for easy sharing' },
+    { value: 'svg', label: 'SVG for print & scale', description: 'Vector format, infinite scaling' },
+    { value: 'pdf', label: 'PDF for documents', description: 'Professional document format' },
+    { value: 'eps', label: 'EPS for designers', description: 'Professional design format' }
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-secondary/5 to-primary/5">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <Button 
             variant="ghost" 
             onClick={onBack}
-            className="mb-4 hover:bg-secondary/20"
+            className="mb-4 hover:bg-white/50"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Button>
           
           <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">Free QR Code Generator</h1>
-            <p className="text-muted-foreground text-lg">Create and download your QR code instantly — completely free!</p>
+            <h1 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Free QR Code Generator
+            </h1>
+            <p className="text-gray-600 text-lg">Create and download your QR code instantly — completely free!</p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
           <div className="space-y-6">
-            <Card>
+            <Card className="shadow-xl border-0 bg-white/70 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
                   <QrCode className="w-5 h-5" />
@@ -102,11 +115,42 @@ const QRGenerator = ({ onBack }: QRGeneratorProps) => {
               </CardContent>
             </Card>
 
+            <Card className="shadow-xl border-0 bg-white/70 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <Download className="w-5 h-5" />
+                  <span>Download Format</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Choose file format:</label>
+                    <Select value={fileFormat} onValueChange={setFileFormat}>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {formatOptions.map((format) => (
+                          <SelectItem key={format.value} value={format.value}>
+                            <div className="flex flex-col">
+                              <span className="font-medium">{format.label}</span>
+                              <span className="text-xs text-gray-500">{format.description}</span>
+                            </div>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
                 onClick={handleGenerate} 
                 disabled={isGenerating}
-                className="flex-1 bg-purple-600 hover:bg-purple-700"
+                className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg"
                 size="lg"
               >
                 {isGenerating ? 'Generating...' : 'Generate QR Code'}
@@ -115,11 +159,11 @@ const QRGenerator = ({ onBack }: QRGeneratorProps) => {
               <Button 
                 onClick={handleDownload}
                 variant="outline"
-                className="flex-1 border-purple-600 text-purple-600 hover:bg-purple-50"
+                className="flex-1 border-blue-600 text-blue-600 hover:bg-blue-50"
                 size="lg"
               >
                 <Download className="w-4 h-4 mr-2" />
-                Download PNG
+                Download QR Code (Free)
               </Button>
             </div>
           </div>
