@@ -1,18 +1,18 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { QrCode, Sparkles, Shield, Download, Eye, KeyRound } from "lucide-react";
-
 interface HeroProps {
   onGetStarted: () => void;
   onPreview: () => void;
   onVerifyCode: () => void;
 }
-
-const Hero = ({ onGetStarted, onPreview, onVerifyCode }: HeroProps) => {
-  return (
-    <section className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center px-4">
+const Hero = ({
+  onGetStarted,
+  onPreview,
+  onVerifyCode
+}: HeroProps) => {
+  return <section className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center px-4">
       <div className="container mx-auto text-center max-w-4xl">
         <div className="mb-8">
           <Badge variant="secondary" className="mb-4 bg-blue-100 text-blue-700 border-blue-200">
@@ -57,31 +57,14 @@ const Hero = ({ onGetStarted, onPreview, onVerifyCode }: HeroProps) => {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Button 
-            onClick={onGetStarted}
-            size="lg"
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg text-lg px-8 py-6"
-          >
+          <Button onClick={onGetStarted} size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg text-lg px-8 py-6">
             <QrCode className="w-5 h-5 mr-2" />
             Get 20 QR Codes for $1
           </Button>
           
-          <Button 
-            onClick={onPreview}
-            variant="outline"
-            size="lg"
-            className="border-blue-600 text-blue-600 hover:bg-blue-50 text-lg px-8 py-6"
-          >
-            <Eye className="w-5 h-5 mr-2" />
-            Free Preview
-          </Button>
           
-          <Button 
-            onClick={onVerifyCode}
-            variant="ghost"
-            size="lg"
-            className="text-gray-600 hover:text-gray-800 text-lg px-8 py-6"
-          >
+          
+          <Button onClick={onVerifyCode} variant="ghost" size="lg" className="text-gray-600 hover:text-gray-800 text-lg px-8 py-6">
             <KeyRound className="w-5 h-5 mr-2" />
             Enter Access Code
           </Button>
@@ -110,8 +93,6 @@ const Hero = ({ onGetStarted, onPreview, onVerifyCode }: HeroProps) => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
