@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -18,6 +17,7 @@ export interface QRData {
   foregroundColor: string;
   backgroundColor: string;
   errorCorrection: 'L' | 'M' | 'Q' | 'H';
+  logo?: string;
 }
 
 const QRGenerator = ({ onBack }: QRGeneratorProps) => {
