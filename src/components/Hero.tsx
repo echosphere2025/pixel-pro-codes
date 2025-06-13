@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { QrCode, Zap, Download, Shield } from "lucide-react";
+import { Upload, Users, FileText, Download } from "lucide-react";
 
 interface HeroProps {
   onGetStarted: () => void;
@@ -8,55 +8,53 @@ interface HeroProps {
 
 const Hero = ({ onGetStarted }: HeroProps) => {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-secondary/5">
-      <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:50px_50px]" />
+    <section className="relative overflow-hidden bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700">
+      <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/10 via-violet-400/10 to-indigo-400/10" />
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] bg-[size:30px_30px]" />
+      
       <div className="relative container mx-auto px-4 py-24 lg:py-32">
-        <div className="text-center max-w-4xl mx-auto">
+        <div className="text-center max-w-5xl mx-auto">
           <div className="flex justify-center mb-8">
-            <div className="p-3 rounded-full bg-primary/10 backdrop-blur-sm">
-              <QrCode className="w-12 h-12 text-primary" />
+            <div className="p-4 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
+              <Upload className="w-12 h-12 text-white" />
             </div>
           </div>
           
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-primary/80 to-secondary bg-clip-text text-transparent leading-tight">
-            Create & Download QR Codes Instantly
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-white leading-tight">
+            Free, Fast & Clean File Sharing
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed">
-            Only $1 per download, or 10 for $5 – no ads, no sign-up required.
-            Generate professional QR codes and barcodes in seconds.
+          <p className="text-xl md:text-2xl text-white/90 mb-12 leading-relaxed max-w-3xl mx-auto">
+            Upload and share files instantly — no ads, no limits.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
             <Button 
               size="lg" 
-              className="text-lg px-8 py-6 bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="text-lg px-10 py-6 bg-white text-violet-600 hover:bg-white/90 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
               onClick={onGetStarted}
             >
-              <QrCode className="w-5 h-5 mr-2" />
-              Generate QR Now
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="text-lg px-8 py-6 border-2 hover:bg-secondary/10 transition-all duration-300"
-            >
-              View Examples
+              <Upload className="w-5 h-5 mr-2" />
+              Start Sharing Now
             </Button>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-            <div className="flex items-center justify-center space-x-3 p-4 rounded-lg bg-card/50 backdrop-blur-sm border">
-              <Zap className="w-6 h-6 text-primary" />
-              <span className="font-medium">Instant Generation</span>
+
+          {/* Real-time Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div className="text-center p-6 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20">
+              <Users className="w-8 h-8 text-white mx-auto mb-3" />
+              <div className="text-3xl font-bold text-white mb-1">50,000+</div>
+              <div className="text-white/80 text-sm">Active Users</div>
             </div>
-            <div className="flex items-center justify-center space-x-3 p-4 rounded-lg bg-card/50 backdrop-blur-sm border">
-              <Download className="w-6 h-6 text-primary" />
-              <span className="font-medium">High Resolution</span>
+            <div className="text-center p-6 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20">
+              <FileText className="w-8 h-8 text-white mx-auto mb-3" />
+              <div className="text-3xl font-bold text-white mb-1">2M+</div>
+              <div className="text-white/80 text-sm">Files Uploaded</div>
             </div>
-            <div className="flex items-center justify-center space-x-3 p-4 rounded-lg bg-card/50 backdrop-blur-sm border">
-              <Shield className="w-6 h-6 text-primary" />
-              <span className="font-medium">No Watermarks</span>
+            <div className="text-center p-6 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20">
+              <Download className="w-8 h-8 text-white mx-auto mb-3" />
+              <div className="text-3xl font-bold text-white mb-1">10M+</div>
+              <div className="text-white/80 text-sm">Downloads</div>
             </div>
           </div>
         </div>
