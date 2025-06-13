@@ -1,5 +1,5 @@
 
-import { Upload } from "lucide-react";
+import { QrCode, Facebook, Twitter, Linkedin, Mail } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -8,39 +8,59 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <Upload className="w-6 h-6 text-violet-400" />
-              <span className="text-xl font-bold">AllSoftLink File Share</span>
+              <QrCode className="w-6 h-6 text-blue-400" />
+              <span className="text-xl font-bold">Free QR Generator</span>
             </div>
-            <p className="text-slate-300 mb-4">
-              Free, fast, and secure file sharing service. Upload and share files 
-              instantly without any limits or advertisements.
+            <p className="text-slate-300 mb-6">
+              Generate QR codes instantly for free. No registration, no limits, 
+              no cost. Create QR codes for URLs, text, Wi-Fi, contacts, and more.
             </p>
-            <p className="text-sm text-slate-400">
-              © 2024 allsoftlink.in. All rights reserved.
-            </p>
+            
+            <div className="flex space-x-4">
+              <a href="#" className="p-2 rounded-full bg-slate-700 hover:bg-blue-600 transition-colors">
+                <Facebook className="w-5 h-5" />
+              </a>
+              <a href="#" className="p-2 rounded-full bg-slate-700 hover:bg-blue-600 transition-colors">
+                <Twitter className="w-5 h-5" />
+              </a>
+              <a href="#" className="p-2 rounded-full bg-slate-700 hover:bg-blue-600 transition-colors">
+                <Linkedin className="w-5 h-5" />
+              </a>
+              <a href="#" className="p-2 rounded-full bg-slate-700 hover:bg-blue-600 transition-colors">
+                <Mail className="w-5 h-5" />
+              </a>
+            </div>
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4 text-violet-300">Features</h3>
+            <h3 className="font-semibold mb-4 text-blue-300">QR Code Types</h3>
             <ul className="space-y-2 text-sm text-slate-300">
-              <li>Unlimited File Upload</li>
-              <li>Secure File Storage</li>
-              <li>Instant File Sharing</li>
-              <li>No Registration Required</li>
-              <li>Mobile Friendly</li>
+              <li>Website URLs</li>
+              <li>Plain Text</li>
+              <li>Email Addresses</li>
+              <li>Phone Numbers</li>
+              <li>Wi-Fi Networks</li>
+              <li>Contact Cards (vCard)</li>
             </ul>
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4 text-violet-300">Support</h3>
+            <h3 className="font-semibold mb-4 text-blue-300">Resources</h3>
             <ul className="space-y-2 text-sm text-slate-300">
-              <li>Help Center</li>
-              <li>Contact Support</li>
-              <li>Privacy Policy</li>
-              <li>Terms of Service</li>
-              <li>About Us</li>
+              <li>How to Scan QR Codes</li>
+              <li>QR Code Best Practices</li>
+              <li>Business Use Cases</li>
+              <li>Marketing Tips</li>
+              <li>Technical Support</li>
+              <li>Contact Us</li>
             </ul>
           </div>
+        </div>
+        
+        <div className="border-t border-slate-700 mt-8 pt-8 text-center">
+          <p className="text-sm text-slate-400">
+            © 2024 Free QR Generator. All rights reserved. Generate QR codes for free, forever.
+          </p>
         </div>
       </div>
     </footer>

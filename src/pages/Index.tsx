@@ -3,6 +3,7 @@ import { useState } from "react";
 import Hero from "@/components/Hero";
 import QRGenerator from "@/components/QRGenerator";
 import Features from "@/components/Features";
+import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -14,6 +15,7 @@ const Index = () => {
         <>
           <Hero onGetStarted={() => setShowGenerator(true)} />
           <Features />
+          <FAQ />
           <Footer />
         </>
       ) : (

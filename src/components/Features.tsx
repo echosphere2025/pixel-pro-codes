@@ -1,50 +1,50 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Upload, Shield, Zap, Globe, FileText, Users } from "lucide-react";
+import { QrCode, Smartphone, Wifi, Mail, Phone, User } from "lucide-react";
 
 const Features = () => {
   const features = [
     {
-      icon: Upload,
-      title: "Instant Upload",
-      description: "Drag & drop or click to upload any file type. Lightning-fast processing."
+      icon: QrCode,
+      title: "Website URLs",
+      description: "Create QR codes for any website or web page. Perfect for marketing materials and business cards."
     },
     {
-      icon: Shield,
-      title: "Secure & Private",
-      description: "Your files are encrypted and stored securely. Privacy is our priority."
+      icon: Wifi,
+      title: "Wi-Fi Networks",
+      description: "Generate QR codes for Wi-Fi networks. Guests can connect instantly by scanning the code."
     },
     {
-      icon: Zap,
-      title: "No Limits",
-      description: "Upload files of any size with no daily limits or restrictions."
+      icon: Mail,
+      title: "Email Addresses",
+      description: "Create QR codes that open email apps with pre-filled recipient, subject, and message."
     },
     {
-      icon: Globe,
-      title: "Share Anywhere",
-      description: "Get shareable links that work anywhere, anytime. No account required."
+      icon: Phone,
+      title: "Phone Numbers",
+      description: "Generate QR codes for phone numbers. Scanning opens the dialer with the number ready to call."
     },
     {
-      icon: FileText,
-      title: "All File Types",
-      description: "Support for documents, images, videos, archives, and more."
+      icon: User,
+      title: "Contact Info",
+      description: "Create vCard QR codes with complete contact information that can be saved to address books."
     },
     {
-      icon: Users,
-      title: "Team Friendly",
-      description: "Perfect for personal use or sharing with teams and clients."
+      icon: Smartphone,
+      title: "Plain Text",
+      description: "Generate QR codes for any text content. Perfect for sharing information quickly and easily."
     }
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-br from-slate-50 to-violet-50">
+    <section className="py-16 bg-gradient-to-br from-slate-50 to-blue-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
-            Why Choose Our File Sharing Service?
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            What Can You Create?
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Simple, secure, and completely free file sharing for everyone
+            Generate QR codes for all types of content — completely free, no limits!
           </p>
         </div>
 
@@ -52,7 +52,7 @@ const Features = () => {
           {features.map((feature, index) => (
             <Card key={index} className="transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border-0 bg-white/70 backdrop-blur-sm shadow-lg">
               <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-violet-500 to-indigo-500 flex items-center justify-center mb-4">
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center mb-4">
                   <feature.icon className="w-6 h-6 text-white" />
                 </div>
                 <CardTitle className="text-xl">{feature.title}</CardTitle>

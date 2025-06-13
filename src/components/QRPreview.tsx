@@ -24,19 +24,8 @@ const QRPreview = ({ qrData }: QRPreviewProps) => {
             light: qrData.backgroundColor,
           },
           errorCorrectionLevel: qrData.errorCorrection,
+          margin: 2,
         });
-
-        // Add watermark for preview
-        const ctx = canvasRef.current.getContext('2d');
-        if (ctx) {
-          ctx.save();
-          ctx.globalAlpha = 0.3;
-          ctx.fillStyle = '#666666';
-          ctx.font = '16px Arial';
-          ctx.textAlign = 'center';
-          ctx.fillText('PREVIEW', qrData.size / 2, qrData.size / 2);
-          ctx.restore();
-        }
       } catch (error) {
         console.error('Error generating QR code:', error);
       }
@@ -46,19 +35,19 @@ const QRPreview = ({ qrData }: QRPreviewProps) => {
   }, [qrData]);
 
   return (
-    <Card className="sticky top-8">
+    <Card>
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle>Preview</CardTitle>
-          <Badge variant="secondary">Free Preview</Badge>
+          <CardTitle>QR Code Preview</CardTitle>
+          <Badge variant="secondary" className="bg-green-100 text-green-700">100% Free</Badge>
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex justify-center">
-          <div className="relative">
+          <div className="relative p-4 bg-white rounded-lg shadow-sm border">
             <canvas
               ref={canvasRef}
-              className="border rounded-lg shadow-sm max-w-full h-auto"
+              className="max-w-full h-auto"
             />
           </div>
         </div>
@@ -73,14 +62,14 @@ const QRPreview = ({ qrData }: QRPreviewProps) => {
             <span>{qrData.size}×{qrData.size}px</span>
           </div>
           <div className="flex justify-between">
-            <span>Error Correction:</span>
-            <span>{qrData.errorCorrection}</span>
+            <span>Format:</span>
+            <span>PNG</span>
           </div>
         </div>
 
-        <div className="p-3 bg-primary/5 rounded-lg border border-primary/20">
-          <p className="text-sm">
-            <strong>💡 Pro Tip:</strong> Purchase for $1 to download high-resolution PNG, SVG, or PDF without watermarks!
+        <div className="p-3 bg-green-50 rounded-lg border border-green-200">
+          <p className="text-sm text-green-700">
+            <strong>✅ Ready to Download:</strong> Your QR code is generated and ready for free download as a high-quality PNG file!
           </p>
         </div>
       </CardContent>
