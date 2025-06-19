@@ -9,7 +9,7 @@ import Features from "@/components/Features";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 
-type AppMode = 'home' | 'payment' | 'verification' | 'dashboard' | 'preview';
+type AppMode = 'home' | 'signup' | 'verification' | 'dashboard' | 'preview';
 
 const Index = () => {
   const [mode, setMode] = useState<AppMode>('home');
@@ -17,10 +17,10 @@ const Index = () => {
   const [userData, setUserData] = useState<any>(null);
 
   const handleGetStarted = () => {
-    setMode('payment');
+    setMode('signup');
   };
 
-  const handlePaymentSuccess = (code: string, userName: string) => {
+  const handleSignupSuccess = (code: string, userName: string) => {
     setUserCode(code);
     // Get updated user data
     const userData = JSON.parse(localStorage.getItem(`qr_user_${code}`) || '{}');
@@ -59,7 +59,7 @@ const Index = () => {
         </>
       )}
       
-      {mode === 'payment' && (
+      {mode === 'signup' && (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-4">
           <div className="w-full">
             <div className="text-center mb-8">
@@ -70,11 +70,11 @@ const Index = () => {
                 ← Back to Home
               </button>
               <h1 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Get 20 QR Codes for $1
+                Get Your Free Access Code
               </h1>
-              <p className="text-gray-600 text-lg">One-time payment, lifetime access with your unique code</p>
+              <p className="text-gray-600 text-lg">No payment required, get instant access to 20 QR codes</p>
             </div>
-            <PaymentForm onPaymentSuccess={handlePaymentSuccess} />
+            <PaymentForm onPaymentSuccess={handleSignupSuccess} />
           </div>
         </div>
       )}

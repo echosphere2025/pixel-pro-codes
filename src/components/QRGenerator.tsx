@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { ArrowLeft, Download, QrCode } from "lucide-react";
 import QRInputForm from "./QRInputForm";
 import QRPreview from "./QRPreview";
+import MediaCapture from "./MediaCapture";
 import { useToast } from "@/hooks/use-toast";
 
 interface QRGeneratorProps {
@@ -13,13 +14,15 @@ interface QRGeneratorProps {
 }
 
 export interface QRData {
-  type: 'text' | 'url' | 'email' | 'phone' | 'wifi' | 'vcard';
+  type: 'text' | 'url' | 'email' | 'phone' | 'wifi' | 'vcard' | 'media';
   content: string;
   size: number;
   foregroundColor: string;
   backgroundColor: string;
   errorCorrection: 'L' | 'M' | 'Q' | 'H';
   logo?: string;
+  mediaType?: 'photo' | 'audio' | 'video';
+  fileName?: string;
 }
 
 const QRGenerator = ({ onBack }: QRGeneratorProps) => {
@@ -36,11 +39,24 @@ const QRGenerator = ({ onBack }: QRGeneratorProps) => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [fileFormat, setFileFormat] = useState('png');
 
+  const handleMediaCapture = (mediaData: string, mediaType: 'photo' | 'audio' | 'video', fileName?: string) => {
+    setQrData({
+      ...qrData,
+      type: 'media',
+      content: mediaData,
+      mediaType,
+      fileName
+    });
+    
+    // Auto-generate QR code when media is captured
+    handleGenerate();
+  };
+
   const handleGenerate = async () => {
     if (!qrData.content.trim()) {
       toast({
         title: "Please enter content",
-        description: "Enter text, URL, or other content to generate your QR code.",
+        description: "Enter text, URL, or capture media to generate your QR code.",
         variant: "destructive",
       });
       return;
@@ -97,7 +113,7 @@ const QRGenerator = ({ onBack }: QRGeneratorProps) => {
             <h1 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Free QR Code Generator
             </h1>
-            <p className="text-gray-600 text-lg">Create and download your QR code instantly — completely free!</p>
+            <p className="text-gray-600 text-lg">Create QR codes from text, URLs, photos, audio, and video files!</p>
           </div>
         </div>
 
@@ -114,6 +130,8 @@ const QRGenerator = ({ onBack }: QRGeneratorProps) => {
                 <QRInputForm qrData={qrData} setQrData={setQrData} />
               </CardContent>
             </Card>
+
+            <MediaCapture onMediaCapture={handleMediaCapture} />
 
             <Card className="shadow-xl border-0 bg-white/70 backdrop-blur-sm">
               <CardHeader>
