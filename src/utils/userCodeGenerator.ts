@@ -60,6 +60,12 @@ export const saveQRCode = (userCode: string, qrIndex: number, qrData: any) => {
   localStorage.setItem(qrKey, JSON.stringify(qrData));
 };
 
+// Delete QR code data
+export const deleteQRCode = (userCode: string, qrIndex: number) => {
+  const qrKey = `qr_${userCode}_${qrIndex}`;
+  localStorage.removeItem(qrKey);
+};
+
 // Get all QR codes for a user
 export const getUserQRCodes = (userCode: string) => {
   const qrCodes = [];

@@ -1,13 +1,12 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Download, Plus, User, Calendar } from "lucide-react";
+import { ArrowLeft, Download, Plus, User, Calendar, Trash2 } from "lucide-react";
 import QRInputForm from "./QRInputForm";
 import QRPreview from "./QRPreview";
 import { QRData } from "./QRGenerator";
-import { saveQRCode, getUserQRCodes, saveUserData, getUserData } from "@/utils/userCodeGenerator";
+import { saveQRCode, getUserQRCodes, saveUserData, getUserData, deleteQRCode } from "@/utils/userCodeGenerator";
 import { useToast } from "@/hooks/use-toast";
 
 interface UserDashboardProps {
@@ -74,6 +73,19 @@ const UserDashboard = ({ userCode, userData, onBack }: UserDashboardProps) => {
     });
 
     setShowGenerator(false);
+  };
+
+  const handleDeleteQR = (qrIndex: number) => {
+    deleteQRCode(userCode, qrIndex);
+    
+    // Refresh saved QRs
+    const qrCodes = getUserQRCodes(userCode);
+    setSavedQRs(qrCodes);
+
+    toast({
+      title: "QR Code Deleted",
+      description: "The QR code has been removed successfully.",
+    });
   };
 
   const handleDownloadQR = (qrData: any) => {
@@ -225,18 +237,38 @@ const UserDashboard = ({ userCode, userData, onBack }: UserDashboardProps) => {
                         <div className="text-xs text-gray-600 mb-2">
                           Type: {qr.data.type}
                         </div>
+                        {qr.data.mediaType && (
+                          <div className="text-xs text-gray-600 mb-2">
+                            Media: {qr.data.mediaType}
+                          </div>
+                        )}
+                        {qr.data.fileName && (
+                          <div className="text-xs text-gray-600 mb-2 truncate">
+                            File: {qr.data.fileName}
+                          </div>
+                        )}
                         <div className="text-xs text-gray-500 mb-3">
                           Created: {new Date(qr.data.createdAt).toLocaleDateString()}
                         </div>
-                        <Button 
-                          size="sm" 
-                          variant="outline"
-                          onClick={() => handleDownloadQR(qr.data)}
-                          className="w-full"
-                        >
-                          <Download className="w-3 h-3 mr-1" />
-                          Download
-                        </Button>
+                        <div className="flex gap-2">
+                          <Button 
+                            size="sm" 
+                            variant="outline"
+                            onClick={() => handleDownloadQR(qr.data)}
+                            className="flex-1"
+                          >
+                            <Download className="w-3 h-3 mr-1" />
+                            Download
+                          </Button>
+                          <Button 
+                            size="sm" 
+                            variant="destructive"
+                            onClick={() => handleDeleteQR(qr.index)}
+                            className="flex-shrink-0"
+                          >
+                            <Trash2 className="w-3 h-3" />
+                          </Button>
+                        </div>
                       </CardContent>
                     </Card>
                   ))}
